@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #3b3939;
+}
+article {
+  display: grid;
+  grid-template-columns: 1rf;
+}
+.carts {
+  display: flex;
+  flex-wrap: wrap;
+}
+article .cart {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid grey;
+  border-radius: 15%;
+  padding: 15px;
+  height: fit-content;
+  margin: 20px;
+  box-shadow: 0px 25px 40px #946218f1;
+}
+article div button, #hozza {
+    width: 100px;
+  margin: 5px;
+  background-color: rgb(243, 149, 109);
+  border: 1px solid rgb(216, 109, 98);
+  border-radius: 8%;
+  padding: 5px;
+}
+#hozza{
+    justify-self: flex-end;
+}
+article table,
+tr,
+th,
+td {
+  border: 1px solid grey;
+
+  padding: 15px;
+  align-items: center;
+}
+article table {
+  box-shadow: 0px 25px 40px #946218f1;
+  border-collapse: collapse;
+  margin: 20px;
+}
+form{
+    box-shadow: 0px 25px 40px #946218f1;
+    margin:20px;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    padding: 10px;
+    max-width: fit-content;
+ }
+ form input{
+    max-width: 350px;
+    margin-bottom:10px;
+ }
+ .radioLabel{
+    width: fit-content;
+    padding: 20px 5px 20px 0;
+ }
+ .radioInput{
+    width: fit-content;
+    margin-right:20px;
+ }
+ .korInput{
+    width: 60px; 
+ }
+ 
