@@ -2,7 +2,7 @@
     //összeállítjuk azt a szöveges tartalmat, ami a HTML kódot jelenti
     let txt = "<div class=carts>";
     for (let index = 0; index < lista.length; index++) {
-      txt += "<div class=cart><button>Törlés</button>";
+      txt += `<div class=cart><button data-id="${index}">Törlés</button>`;
       for (const key in lista[index]) {
         txt += `<p>${key} : ${(key, lista[index][key])}</p>`;
       }
@@ -40,7 +40,7 @@
     <label for="kan" class=radioLabel>kan</label>
     <input type="radio" id="kan" name="neme" value="kan" class=radioInput>
     </div>
-    <input type="submit" value="Hozzáad" id="hozza">
+    <button type="button" value="Hozzáad" id="hozza">Hozzáad</button>
   </form>`;
   
     return txt3;
