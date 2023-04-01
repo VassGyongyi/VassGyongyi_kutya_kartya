@@ -16,7 +16,7 @@ function init() {
 function oldal() {
   
   //let txt = osszeallit(kutyaLista);
-  ART.append(osszeallit(kutyaLista));
+  ART.html(osszeallit(kutyaLista));
   ART.append(tablazatOsszeallit(kutyaLista));
   ART.append(urlapOsszeallit(kutyaLista));
   const GOMB = $("article div.carts button");
@@ -67,6 +67,7 @@ function ujKutya(event) {
   }
   kutyaLista.push(kutya);
   console.log(kutyaLista);
-  let urlap = $("article form");
-  urlap.html(urlapOsszeallit(kutyaLista));
+  //let urlap = $("article form");
+  //urlap.html(urlapOsszeallit(kutyaLista));
+  oldal()
 }
