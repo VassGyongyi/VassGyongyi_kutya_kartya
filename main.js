@@ -1,51 +1,54 @@
-import {kutyaLista} from "./adat.js";
-import {osszeallit, tablazatOsszeallit, urlapOsszeallit} from "./adatkezeles.js";
+import { kutyaLista } from "./adat.js";
+import {
+  osszeallit,
+  tablazatOsszeallit,
+  urlapOsszeallit,
+} from "./adatkezeles.js";
 import { rendezBarmiSzerint } from "./rendezesSzures.js";
 window.addEventListener("load", init);
 
-let ART;
 
+let ART = $("article");
 function init() {
-  rendezBarmiSzerint(kutyaLista,kutyaLista.kor, -1);
-  ART = $("article");
+  rendezBarmiSzerint(kutyaLista, kutyaLista.kor, -1);
+  oldal();
+}
+function oldal() {
+  
   //let txt = osszeallit(kutyaLista);
   ART.append(osszeallit(kutyaLista));
   ART.append(tablazatOsszeallit(kutyaLista));
-  ART.append(urlapOsszeallit());
+  ART.append(urlapOsszeallit(kutyaLista));
   const GOMB = $("article div.carts button");
-  
-    GOMB.on("click", egerEsemeny);
-  
+  GOMB.on("click", egerEsemeny);
+
   const SUBMIT = $("#hozza");
   SUBMIT.on("click", ujKutya);
-
 }
-
 //gomb elemre kattintva a szülő objektumot letörli
 function egerEsemeny(event) {
-  const GOMB =$(event.target);
-  let index=GOMB.attr("data-id")
+  const GOMB = $(event.target);
+  let index = GOMB.attr("data-id");
   GOMB.parent().remove();
   //kitörli a táblázat sorát is
-  kutyaLista.splice(index,1);
+  kutyaLista.splice(index, 1);
   let tablazat = $("article table");
   tablazat.html(tablazatOsszeallit(kutyaLista));
 }
 
 function ujKutya(event) {
-  console.log(kutyaLista)
+  console.log(kutyaLista);
   //event.preventDefault();
   const kutya = {};
   let szuka = $("#szuka");
-  let kan =$("#kan");
-  const ADAT = $("input");
-
+  let kan = $("#kan");
+ 
   //szedd össze az űrlap adatait,
   //tegyük bele egy objektumba
   //fűzzük hozzá a KUTYALISTA listához
 
   const NevInputElem = $("#knev");
-   NevInputElem.val(kutya.név);
+  NevInputElem.val(kutya.név);
 
   const KorInputElem = $("#kor");
   KorInputElem.val(kutya.kor);
@@ -57,13 +60,13 @@ function ujKutya(event) {
   MmagInputElem.val(kutya.marmagasság);
 
   const NemInputElem = $("#szuka");
-  if (NemInputElem.checked){
-    kutya.neme="szuka";
-  }
-  else{
-    kutya.neme="kan";
+  if (NemInputElem.checked) {
+    kutya.neme = "szuka";
+  } else {
+    kutya.neme = "kan";
   }
   kutyaLista.push(kutya);
-  console.log(kutyaLista)
-//init()
+  console.log(kutyaLista);
+  let urlap = $("article form");
+  urlap.html(urlapOsszeallit(kutyaLista));
 }
