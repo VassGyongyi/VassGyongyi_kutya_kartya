@@ -9,7 +9,7 @@ function init() {
   rendezBarmiSzerint(kutyaLista,kutyaLista.kor, -1);
   ART = document.querySelector("article");
   //let txt = osszeallit(kutyaLista);
-  ART.innerHTML += osszeallit(kutyaLista);
+  ART.innerHTML = osszeallit(kutyaLista);
   ART.innerHTML += tablazatOsszeallit(kutyaLista);
   ART.innerHTML += urlapOsszeallit();
   const GOMB = document.querySelectorAll("article div button");
@@ -22,6 +22,7 @@ function init() {
   SUBMIT.addEventListener("click", ujKutya);
 }
 
+
 //gomb elemre kattintva a szülő objektumot letörli
 function egerEsemeny(event, i) {
   const GOMB = event.target;
@@ -33,6 +34,8 @@ function egerEsemeny(event, i) {
 }
 
 function ujKutya() {
+  console.log(kutyaLista)
+  event.preventDefault();
   const kutya = {};
   let szuka = document.querySelector("#szuka");
   let kan = document.querySelector("#kan");
@@ -62,7 +65,5 @@ function ujKutya() {
     kutya.neme="kan";
   }
   kutyaLista.push(kutya);
-  ART.innerHTML=osszeallit(kutyaLista);
-  ART.innerHTML+=tablazatOsszeallit(kutyaLista);
-  ART.innerHTML+=urlapOsszeallit();
+init()
 }
