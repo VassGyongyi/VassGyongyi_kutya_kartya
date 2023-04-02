@@ -2,7 +2,7 @@
     //összeállítjuk azt a szöveges tartalmat, ami a HTML kódot jelenti
     let txt = "<div class=carts>";
     for (let index = 0; index < lista.length; index++) {
-      txt += "<div class=cart><button>Törlés</button>";
+      txt += `<div class=cart><button data-id="${index}">Törlés</button>`;
       for (const key in lista[index]) {
         txt += `<p>${key} : ${(key, lista[index][key])}</p>`;
       }
@@ -25,8 +25,8 @@
     txt2 += "</table></div>";
     return txt2;
   }
-  export function urlapOsszeallit() {
-    let txt3 = `<div><form><label for="knev">Kutya neve:</label><br>
+  export function urlapOsszeallit(lista) {
+    let txt3 = `<form><label for="knev">Kutya neve:</label><br>
     <input type="text" id="knev" name="knev"><br>
     <label for="fajta">Fajtája:</label><br>
     <input type="text" id="fajta" name="fajta"><br>
@@ -40,7 +40,7 @@
     <label for="kan" class=radioLabel>kan</label>
     <input type="radio" id="kan" name="neme" value="kan" class=radioInput>
     </div>
-    <input type="submit" value="Hozzáad" id="hozza">
+    <button id="hozza">Hozzáad</button>
   </form>`;
   
     return txt3;

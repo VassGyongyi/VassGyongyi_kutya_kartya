@@ -1,68 +1,73 @@
-import {kutyaLista} from "./adat.js";
-import {osszeallit, tablazatOsszeallit, urlapOsszeallit} from "./adatkezeles.js";
+import { kutyaLista } from "./adat.js";
+import {
+  osszeallit,
+  tablazatOsszeallit,
+  urlapOsszeallit,
+} from "./adatkezeles.js";
 import { rendezBarmiSzerint } from "./rendezesSzures.js";
 window.addEventListener("load", init);
 
-let ART;
 
+let ART = $("article");
 function init() {
-  rendezBarmiSzerint(kutyaLista,kutyaLista.kor, -1);
-  ART = document.querySelector("article");
+  rendezBarmiSzerint(kutyaLista, kutyaLista.kor, -1);
+  oldal();
+}
+function oldal() {
+  
   //let txt = osszeallit(kutyaLista);
-  ART.innerHTML += osszeallit(kutyaLista);
-  ART.innerHTML += tablazatOsszeallit(kutyaLista);
-  ART.innerHTML += urlapOsszeallit();
-  const GOMB = document.querySelectorAll("article div button");
-  for (let i = 0; i < GOMB.length; i++) {
-    GOMB[i].addEventListener("click", function () {
-      egerEsemeny(event, i);
-    });
-  }
-  const SUBMIT = document.querySelector("#hozza");
-  SUBMIT.addEventListener("click", ujKutya);
-}
+  ART.html(osszeallit(kutyaLista));
+  ART.append(tablazatOsszeallit(kutyaLista));
+  ART.append(urlapOsszeallit(kutyaLista));
+  const GOMB = $("article div.carts button");
+  GOMB.on("click", egerEsemeny);
 
+  const SUBMIT = $("#hozza");
+  SUBMIT.on("click", ujKutya);
+}
 //gomb elemre kattintva a szülő objektumot letörli
-function egerEsemeny(event, i) {
-  const GOMB = event.target;
-  GOMB.parentElement.remove();
+function egerEsemeny(event) {
+  const GOMB = $(event.target);
+  let index = GOMB.attr("data-id");
+  GOMB.parent().remove();
   //kitörli a táblázat sorát is
-  delete kutyaLista[i];
-  let tablazat = document.querySelector("article table");
-  tablazat.innerHTML = tablazatOsszeallit(kutyaLista);
+  kutyaLista.splice(index, 1);
+  let tablazat = $("article table");
+  tablazat.html(tablazatOsszeallit(kutyaLista));
 }
 
-function ujKutya() {
+function ujKutya(event) {
+  console.log(kutyaLista);
+  //event.preventDefault();
   const kutya = {};
-  let szuka = document.querySelector("#szuka");
-  let kan = document.querySelector("#kan");
-  const ADAT = document.querySelectorAll("input");
-
+  let szuka = $("#szuka");
+  let kan = $("#kan");
+ 
   //szedd össze az űrlap adatait,
   //tegyük bele egy objektumba
   //fűzzük hozzá a KUTYALISTA listához
 
-  const NevInputElem = document.querySelector("#knev");
-  kutya.név = NevInputElem.value;
+  const NevInputElem = $("#knev");
+  NevInputElem.val(kutya.név);
 
-  const KorInputElem = document.querySelector("#kor");
-  kutya.kor = KorInputElem.value;
+  const KorInputElem = $("#kor");
+  KorInputElem.val(kutya.kor);
 
-  const FajtaInputElem = document.querySelector("#fajta");
-  kutya.fajta = FajtaInputElem.value;
+  const FajtaInputElem = $("#fajta");
+  FajtaInputElem.val(kutya.fajta);
 
-  const MmagInputElem = document.querySelector("#magas");
-  kutya.marmagasság = MmagInputElem.value;
+  const MmagInputElem = $("#magas");
+  MmagInputElem.val(kutya.marmagasság);
 
-  const NemInputElem = document.querySelector("#szuka");
-  if (NemInputElem.checked){
-    kutya.neme="szuka";
-  }
-  else{
-    kutya.neme="kan";
+  const NemInputElem = $("#szuka");
+  if (NemInputElem.checked) {
+    kutya.neme = "szuka";
+  } else {
+    kutya.neme = "kan";
   }
   kutyaLista.push(kutya);
-  ART.innerHTML=osszeallit(kutyaLista);
-  ART.innerHTML+=tablazatOsszeallit(kutyaLista);
-  ART.innerHTML+=urlapOsszeallit();
+  console.log(kutyaLista);
+  //let urlap = $("article form");
+  //urlap.html(urlapOsszeallit(kutyaLista));
+  oldal()
 }
